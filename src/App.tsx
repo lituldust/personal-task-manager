@@ -8,18 +8,16 @@ import Ongoing from "./assets/support.png";
 import Finish from "./assets/complete.png";
 
 const oldTasks = localStorage.getItem("tasks") as string;
-console.log(oldTasks);
 
 function App() {
-  
   const [tasks, setTasks] = useState<any[]>(JSON.parse(oldTasks) || []);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const handleDelete = (taskIndex: number) => {
-    const newTasks = tasks.filter((task, index) => index !== taskIndex);
+  const handleDelete = (taskId: number) => {
+    const newTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(newTasks);
   };
 
@@ -29,7 +27,14 @@ function App() {
     status?: string,
     tags: string[] = []
   ) => {
-    setTasks((prevTasks) => [...prevTasks, { task, deadline, status, tags }]);
+    const newTask = {
+      id: Date.now(), 
+      task,
+      deadline,
+      status,
+      tags,
+    };
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
   return (

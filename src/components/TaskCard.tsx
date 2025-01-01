@@ -4,15 +4,15 @@ import Trash from "../assets/trash.png";
 
 interface TaskCardProps {
   task: {
+    id: number;
     task: string;
     deadline?: string;
     tags: string[];
   };
-  handleDelete: (taskIndex: number) => void;
-  index: number;
+  handleDelete: (taskId: number) => void;
 }
 
-const TaskCard = ({ task, handleDelete, index }: TaskCardProps) => {
+const TaskCard = ({ task, handleDelete }: TaskCardProps) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const selectTag = (tag: string) => {
@@ -44,12 +44,12 @@ const TaskCard = ({ task, handleDelete, index }: TaskCardProps) => {
         {task.deadline ? `Due: ${task.deadline}` : "No due date"}
       </p>
 
-      <div className="flex justify-end items-center" >
+      <div className="flex justify-end items-center">
         <img
           src={Trash}
           alt="Delete"
           className="size-5 m-2 opacity-30 hover:opacity-100 hover:cursor-pointer"
-          onClick={ () => handleDelete(index)}
+          onClick={() => handleDelete(task.id)}
         />
       </div>
     </article>
