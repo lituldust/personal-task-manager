@@ -1,12 +1,19 @@
 interface Props {
   tagName: string;
+  isSelected: boolean;
+  selectTag: (tag: string) => void;
 }
 
-const Tag = ({ tagName }: Props) => {
+const Tag = ({ tagName, isSelected, selectTag }: Props) => {
   return (
     <button
-      className="w-auto h-auto text-xs font-bold border border-bice-blue bg-white hover:!bg-bice-blue text-bice-blue rounded-md px-3 py-1 hover:text-white hover:border-hidden"
+      className={`w-auto h-auto text-xs font-bold border rounded-md px-3 py-1 ${
+        isSelected
+          ? "bg-bice-blue text-white border-bice-blue"
+          : "bg-white text-bice-blue border-bice-blue hover:bg-bice-blue"
+      }`}
       type="button"
+      onClick={() => selectTag(tagName)}
     >
       {tagName}
     </button>

@@ -27,5 +27,6 @@ export default {
   },
   plugins: [
     flowbite.content(),
+    require("flowbite/plugin")
   ],
 }
