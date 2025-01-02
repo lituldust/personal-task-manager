@@ -6,6 +6,7 @@ interface TaskSectionProps {
   tasks: any[];
   status: string;
   handleDelete: (taskId: number) => void;
+  handleUpdateDeadline: (taskId: number, newDeadline: string) => void;
 }
 
 const TaskSection = ({
@@ -13,7 +14,8 @@ const TaskSection = ({
   imageSrc,
   tasks,
   status,
-  handleDelete,
+  handleDelete, 
+  handleUpdateDeadline
 }: TaskSectionProps) => {
   const filteredTasks = tasks.filter((task) => task.status === status);
 
@@ -29,6 +31,7 @@ const TaskSection = ({
             key={task.id}
             task={task}
             handleDelete={handleDelete}
+            handleUpdateDeadline={handleUpdateDeadline}
           />
         ))
       ) : (

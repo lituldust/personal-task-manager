@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Tag from "./Tag";
 import { Alert } from "flowbite-react";
@@ -37,10 +37,12 @@ function TaskForm({ onAddTask }: TaskFormProps) {
   const [hasDeadline, setHasDeadline] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertClass, setAlertClass] = useState("alert-slide-in");
 
   const onSubmit: SubmitHandler<TaskFormInputs> = (data) => {
     if (selectedTags.length === 0) {
       setShowAlert(true);
+      setAlertClass("alert-visible");
       return;
     }
     if (data.task.trim()) {
@@ -65,6 +67,17 @@ function TaskForm({ onAddTask }: TaskFormProps) {
       return newTags;
     });
   };
+  
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setAlertClass("alert-slide-out");
+        setTimeout(() => setShowAlert(false), 500);
+      }, 2000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [showAlert]);
 
   return (
     <>
@@ -145,7 +158,7 @@ function TaskForm({ onAddTask }: TaskFormProps) {
             color="failure"
             onDismiss={() => setShowAlert(false)}
             icon={HiInformationCircle}
-            className="absolute top-1 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-out z-50"
+            className={`absolute -top-1 left-1/2 transform -translate-x-1/2 ${alertClass}`}
           >
             Please select at least one tag.
           </Alert>

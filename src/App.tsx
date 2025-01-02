@@ -21,6 +21,13 @@ function App() {
     setTasks(newTasks);
   };
 
+  const handleUpdateDeadline = (taskId: number, newDeadline: string) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, deadline: newDeadline } : task
+    );
+    setTasks(updatedTasks);
+  };
+
   const handleAddTask = (
     task: string,
     deadline?: string,
@@ -50,6 +57,7 @@ function App() {
               tasks={tasks}
               status="todo"
               handleDelete={handleDelete}
+              handleUpdateDeadline={handleUpdateDeadline}
             />
             <TaskSection
               secName="Ongoing"
@@ -57,6 +65,7 @@ function App() {
               tasks={tasks}
               status="doing"
               handleDelete={handleDelete}
+              handleUpdateDeadline={handleUpdateDeadline}
             />
             <TaskSection
               secName="Finished"
@@ -64,6 +73,7 @@ function App() {
               tasks={tasks}
               status="done"
               handleDelete={handleDelete}
+              handleUpdateDeadline={handleUpdateDeadline}
             />
           </div>
         </main>
