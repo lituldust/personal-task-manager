@@ -134,7 +134,7 @@ function TaskForm({ onAddTask }: TaskFormProps) {
             />
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-end">
             <select
               {...register("status", { required: true })}
               className="border border-dark rounded-md font-light px-3 py-2 text-sm text-left text-blue-700 hover:cursor-pointer w-20"
@@ -146,7 +146,7 @@ function TaskForm({ onAddTask }: TaskFormProps) {
 
             <button
               type="submit"
-              className="px-3 py-2 bg-bice-blue text-white rounded-md hover:bg-blue-600"
+              className="px-3 py-2 bg-bice-blue text-white rounded-md hover:bg-blue-600 min-[375px]:text-xs min-[375px]:px-1 min-[375px]:py-0"
             >
               + Add Task
             </button>
